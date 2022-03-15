@@ -2,6 +2,16 @@
     <header class="app-header">
         <h1>Simple ToDo App</h1>
     </header>
+    <article class="error" v-if="error">
+        <div>
+            <p>{{ error }}</p>
+            <button @click="error = ''">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em" height="1em" fill="currentColor">
+                    <path d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM394.8 466.1C393.2 492.3 372.3 512 346.9 512H101.1C75.75 512 54.77 492.3 53.19 466.1L31.1 128H416L394.8 466.1z"/>
+                </svg>
+            </button>
+        </div>
+    </article>
     <section class="tasks-list">
         <Task 
             v-for="(task, key) in todos"
@@ -38,7 +48,8 @@ export default {
     data() {
         return {
             todos: [],
-            newTodo: ''
+            newTodo: '',
+            error: ''
         }
     },
     methods: {
@@ -46,7 +57,8 @@ export default {
             if(this.newTodo.length > 3) {
                 this.todos.unshift({text: this.newTodo, done: false});
                 this.newTodo = '';
-            }
+            }else
+                this.error = 'The task cannot be shorter than 4 characters'
         },
         removeTask(index) {
             this.todos.splice(index, 1);
@@ -118,5 +130,37 @@ body {
 }
 .form__btn:hover {
     background: #cad4da;
+}
+.error {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.error div {
+    background: #ca3030;
+    color: #f5f5f5;
+    padding: 20px 0 20px 15px;
+    width: 50%;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+.error button {
+    height: 45px;
+    width: 45px;
+    background: #ca3030;
+    color: #f5f5f5;
+    border: none;
+    transition: .5s;
+}
+.error button:hover {
+    background: #a02626;
 }
 </style>
