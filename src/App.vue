@@ -8,7 +8,9 @@
             :text="task.text"
             :done="task.done"
             :index="key"
-            :key="key" />
+            :key="key"
+            @remove="removeTask"
+            @done="markDone" />
     </section>
     <form class="form">
         <input
@@ -45,6 +47,12 @@ export default {
                 this.todos.unshift({text: this.newTodo, done: false});
                 this.newTodo = '';
             }
+        },
+        removeTask(index) {
+            this.todos.splice(index, 1);
+        },
+        markDone(index) {
+            this.todos[index].done = !this.todos[index].done;
         }
     }
 }
