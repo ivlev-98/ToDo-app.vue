@@ -57,15 +57,26 @@ export default {
             if(this.newTodo.length > 3) {
                 this.todos.unshift({text: this.newTodo, done: false});
                 this.newTodo = '';
+                this.store();
             }else
                 this.error = 'The task cannot be shorter than 4 characters'
         },
         removeTask(index) {
             this.todos.splice(index, 1);
+            this.store();
         },
         markDone(index) {
             this.todos[index].done = !this.todos[index].done;
+            this.store();
+        },
+        store() {
+            let todosObject = JSON.stringify(this.todos);
+            localStorage.setItem('todos', todosObject);
         }
+    },
+    created() {
+        let todosObject = localStorage.getItem('todos');
+        this.todos = todosObject ? JSON.parse(todosObject) : [];
     }
 }
 </script>
