@@ -64,7 +64,7 @@ export default {
 .task__btn.success {
     background: #2cb95b;
 }
-.task__btn.success :hover {
+.task__btn.success:hover {
     background: #229448;
 }
 .task__btn.danger {
