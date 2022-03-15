@@ -2,6 +2,9 @@
     <header class="app-header">
         <h1>Simple ToDo App</h1>
     </header>
+    <section class="tasks-list">
+        <Task text="Example task" done="true" />
+    </section>
     <form class="form">
         <input class="form__input" type="text" placeholder="Insert new task">
         <button class="form__btn" @click.prevent="addTask">
@@ -13,8 +16,13 @@
 </template>
 
 <script>
+import Task from '@/components/Task.vue';
+
 export default {
-    name: 'App'
+    name: 'App',
+    components: {
+        Task
+    }
 }
 </script>
 
